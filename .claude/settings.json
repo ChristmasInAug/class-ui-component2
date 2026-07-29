@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash D:/classClaude/classProject/class-ui-component2/extract-my-prompts.sh",
+            "command": "bash D:/classClaude/classProject/class-ui-component2/extract-my-prompts.sh -o Prompt.md --append",
             "statusMessage": "Prompt.md 기록 갱신 중..",
             "timeout": 30
           }

@@ -51,17 +51,36 @@ while [ $# -gt 0 ]; do
 done
 
 # 사전 점검
-command -v python3 >/dev/null 2>&1 || { echo "❌ python3 가 필요합니다."; exit 1; }
+command -v python >/dev/null 2>&1 || { echo "❌ python3 가 필요합니다."; exit 1; }
 [ -d "$PROJECTS_DIR" ] || { echo "❌ 세션 폴더가 없습니다: $PROJECTS_DIR"; exit 1; }
 
 # 절대경로로 정규화(상대경로로 줘도 cwd 매칭이 되도록)
 TARGET_CWD="$(cd "$TARGET_CWD" 2>/dev/null && pwd || echo "$TARGET_CWD")"
 
-python3 - "$PROJECTS_DIR" "$TARGET_CWD" "$OUT" "$MODE" "$SESSION_ID" << 'PYEOF'
+# Windows(Git Bash/MSYS)에서는 여기까지 만든 경로가 /d/..., /c/... 같은 POSIX 형태다.
+# bash 자신은 이 형태를 알아서 이해하지만, 뒤에서 실행할 python.exe(네이티브 윈도우 실행파일)는
+# 이 형태를 그대로 못 읽는다(글롭·비교 전부 실패). cygpath가 있으면 D:\... 형태로 바꿔서 넘긴다.
+if command -v cygpath >/dev/null 2>&1; then
+  PROJECTS_DIR="$(cygpath -w "$PROJECTS_DIR")"
+  TARGET_CWD="$(cygpath -w "$TARGET_CWD")"
+fi
+
+python - "$PROJECTS_DIR" "$TARGET_CWD" "$OUT" "$MODE" "$SESSION_ID" << 'PYEOF'
 import json, sys, glob, os, re
 from datetime import datetime
 
+# Windows 콘솔의 기본 stdout 인코딩(cp949 등)은 ✅/⚠️/❌ 같은 이모지를 못 담아
+# print() 가 UnicodeEncodeError로 죽는다. UTF-8로 강제한다(Python 3.7+).
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
 projects, target_cwd, out, mode, session_id = sys.argv[1:6]
+
+def norm(p):  # 대소문자·구분자 차이를 흡수(윈도우 드라이브 문자 d: vs D: 등)
+    return os.path.normcase(os.path.normpath(p)) if p else p
+
+target_cwd_n = norm(target_cwd)
 
 # 1) cwd 가 일치하는 세션 파일 수집
 matched = []
@@ -70,7 +89,7 @@ for f in glob.glob(os.path.join(projects, "*", "*.jsonl")):
         with open(f, encoding="utf-8") as fh:
             for line in fh:
                 try:
-                    if json.loads(line).get("cwd") == target_cwd:
+                    if norm(json.loads(line).get("cwd", "")) == target_cwd_n:
                         matched.append(f); break
                 except Exception:
                     continue

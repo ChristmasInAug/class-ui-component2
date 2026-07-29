@@ -6,7 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 CareerFoundry의 ["32 UI Elements Designers Need To Know"](https://careerfoundry.com/en/blog/ui-design/ui-element-glossary/) 글로서리에 나오는 32가지 UI 컴포넌트 + 사이트 운영에 필수인 공통 UX 레이어 컴포넌트 6종(경고/확인/토스트/스낵바/바텀시트/알림 배너)을 합쳐 총 38개 컴포넌트를 보여주는 프론트엔드 학습·레퍼런스 사이트다. 좌측 사이드바에서 컴포넌트를 선택하면 우측에 이름·정의/설명과 함께 미리보기 · HTML · CSS · JS 탭이 나타나며, 각 코드 블록은 자체 구현한 문법 하이라이트가 적용되고 원본 소스를 그대로 클립보드에 복사하는 버튼이 붙어 있다.
 
-빌드 도구나 패키지 매니저 없이 **`index.html` 단일 파일**로 전체가 구성되며, 외부 의존성은 Google Fonts(Noto Sans KR, JetBrains Mono) 링크 2개뿐이다. 브라우저에서 `index.html`을 직접 열면 그대로 동작한다 — 별도의 설치·빌드·서버 실행 명령이 없다.
+빌드 도구나 패키지 매니저 없이 **`ui-kit-playground.html` 단일 파일**로 전체가 구성되며, 외부 의존성은 Google Fonts(Noto Sans KR, JetBrains Mono) 링크 2개뿐이다. 브라우저에서 `ui-kit-playground.html`을 직접 열면 그대로 동작한다 — 별도의 설치·빌드·서버 실행 명령이 없다.
+
+`index.html`은 실제 앱이 아니라 `docs/resource/TROUBLE_SHOOTING.md`의 "정본은 하나로 유지 + 루트는 리다이렉트" 패턴을 따르는 얇은 리다이렉트 stub이다(GitHub Pages는 루트 URL에서 `index.html`을 찾으므로). 실제 컴포넌트/로직 수정은 항상 `ui-kit-playground.html`에서 한다 — `index.html`은 `<meta http-equiv="refresh">`로 그리로 넘길 뿐, 유지보수 대상이 아니다.
 
 ## 강제 디자인 규칙: `.claude/rules/anti-ai-slop.md`
 
@@ -26,7 +28,7 @@ CareerFoundry의 ["32 UI Elements Designers Need To Know"](https://careerfoundry
 - `component-portfolio.html` (= `ui-elements-demo.html`, 완전히 동일한 파일) — `index.html`의 레이아웃·데이터 구조·핵심 로직(`select()`, `buildSrcdoc()`, 사이드바 카테고리 렌더링)의 실제 출처. anti-slop 규칙을 이미 준수하는 유일한 참고 파일이라 구조를 그대로 가져와 확장했다.
 - `ui-component.html`, `ui-components-32-catalog.html`, `alert-ui-showcase.html`, `color-personal-card.html`, `colorpicker.html` — 그라데이션, 컬러 글로우 그림자, hover scale 등 anti-slop 규칙을 위반하는 시각 스타일을 쓴다. 컴포넌트 아이디어·커버리지 체크리스트로만 참고하고, CSS/시각 스타일은 절대 그대로 옮기지 않는다.
 
-## `index.html` 구조
+## `ui-kit-playground.html` 구조 (실제 앱 — 정본)
 
 전체가 `<style>` 하나 + `<script>` 하나로 이루어진 단일 파일이며, 핵심 구성은 다음과 같다.
 
@@ -45,7 +47,7 @@ CareerFoundry의 ["32 UI Elements Designers Need To Know"](https://careerfoundry
 
 ## 로컬에서 확인하기
 
-빌드 명령이 없다. `index.html`을 브라우저로 직접 열면(`file://` 또는 정적 서버 둘 다 가능) 바로 확인할 수 있다. 코드 문법 오류만 빠르게 확인하려면 인라인 `<script>` 블록을 추출해 `node --check`로 검사할 수 있다.
+빌드 명령이 없다. `ui-kit-playground.html`을 브라우저로 직접 열면(`file://` 또는 정적 서버 둘 다 가능) 바로 확인할 수 있다. `index.html`을 열어도 즉시 리다이렉트되긴 하지만, 개발 중에는 `ui-kit-playground.html`을 바로 여는 편이 리다이렉트 지연 없이 확인하기 편하다. 코드 문법 오류만 빠르게 확인하려면 인라인 `<script>` 블록을 추출해 `node --check`로 검사할 수 있다.
 
 ## 프롬프트 기록 훅
 
