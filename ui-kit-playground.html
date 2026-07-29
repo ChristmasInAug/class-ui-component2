@@ -85,6 +85,7 @@ button{font-family:inherit;}
 .code-wrap{position:relative; background:var(--bg-code);}
 .code-copy{
   position:absolute; top:10px; right:10px; z-index:2;
+  display:flex; align-items:center; gap:5px;
   font-size:11px; padding:5px 10px; color:var(--ink-2); background:var(--bg);
   border:1px solid var(--line-2); border-radius:5px; cursor:pointer;
   transition:background-color 120ms, color 120ms;
@@ -117,7 +118,7 @@ code{font-family:var(--mono); font-size:13px; line-height:1.7; color:#27272a; wh
 </style>
 </head>
 <body>
-<button class="menu-toggle" id="menuToggle">☰ 목록</button>
+<button class="menu-toggle" id="menuToggle"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg> 목록</button>
 <div class="layout">
   <aside class="side" id="side">
     <div class="brand">
@@ -212,14 +213,14 @@ document.querySelector('.cfm__ok').addEventListener('click', cfmClose);`
 .toast__area { position: fixed; top: 16px; right: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 10; }
 .toast { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #18181b; color: #fff; border-radius: 6px; font-size: 13px; min-width: 220px; border: 1px solid #27272a; }
 .toast__msg { flex: 1; }
-.toast__close { background: 0; border: 0; color: #a1a1aa; cursor: pointer; font-size: 14px; padding: 0; }
+.toast__close { display: flex; align-items: center; background: 0; border: 0; color: #a1a1aa; cursor: pointer; font-size: 14px; padding: 0; }
 .toast__close:hover { color: #fff; }`,
     js: `var toastOpen = document.querySelector('.toast__open');
 var toastArea = document.querySelector('.toast__area');
 toastOpen.addEventListener('click', function () {
   var t = document.createElement('div');
   t.className = 'toast';
-  t.innerHTML = '<span class="toast__msg">저장되었습니다.</span><button class="toast__close">×</button>';
+  t.innerHTML = '<span class="toast__msg">저장되었습니다.</span><button class="toast__close" aria-label="닫기"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>';
   toastArea.appendChild(t);
   var timer = setTimeout(function () { t.remove(); }, 2600);
   t.querySelector('.toast__close').addEventListener('click', function () {
@@ -290,11 +291,11 @@ document.querySelectorAll('.sheet__item').forEach(function (item) {
     html: `<button class="ban__open">배너 표시</button>
 <div class="ban" hidden>
   <span>정기 점검으로 오늘 밤 12시부터 1시간 동안 서비스가 중단됩니다.</span>
-  <button class="ban__close" aria-label="닫기">&times;</button>
+  <button class="ban__close" aria-label="닫기"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
 </div>`,
     css: `.ban__open { padding: 9px 16px; font-size: 14px; background: #fff; border: 1px solid #d4d4d8; border-radius: 6px; cursor: pointer; }
 .ban { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: #18181b; color: #fff; font-size: 13px; }
-.ban__close { margin-left: auto; background: 0; border: 0; color: #a1a1aa; font-size: 16px; cursor: pointer; padding: 0; }
+.ban__close { display: flex; align-items: center; margin-left: auto; background: 0; border: 0; color: #a1a1aa; cursor: pointer; padding: 0; }
 .ban__close:hover { color: #fff; }`,
     js: `var banOpen = document.querySelector('.ban__open');
 var ban = document.querySelector('.ban');
@@ -311,7 +312,7 @@ const ELEMENTS = [
   <div class="acc">
     <button class="acc__head" aria-expanded="false">
       <span>배송은 얼마나 걸리나요?</span>
-      <span class="acc__sign">+</span>
+      <span class="acc__sign"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
     </button>
     <div class="acc__body" hidden>
       <p>주문 후 영업일 기준 2~3일 이내 도착합니다.</p>
@@ -320,7 +321,7 @@ const ELEMENTS = [
   <div class="acc">
     <button class="acc__head" aria-expanded="false">
       <span>교환·반품이 가능한가요?</span>
-      <span class="acc__sign">+</span>
+      <span class="acc__sign"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
     </button>
     <div class="acc__body" hidden>
       <p>수령 후 7일 이내 미사용 상품에 한해 가능합니다.</p>
@@ -329,7 +330,7 @@ const ELEMENTS = [
   <div class="acc">
     <button class="acc__head" aria-expanded="false">
       <span>해외 배송도 가능한가요?</span>
-      <span class="acc__sign">+</span>
+      <span class="acc__sign"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
     </button>
     <div class="acc__body" hidden>
       <p>일부 국가에 한해 가능하며, 배송비와 기간은 국가별로 다릅니다.</p>
@@ -345,21 +346,23 @@ const ELEMENTS = [
   font-size: 15px; text-align: left; color: #18181b;
 }
 .acc__head[aria-expanded="true"] { background: #f4f4f5; }
-.acc__sign { flex-shrink: 0; font-size: 18px; color: #2563EB; }
+.acc__sign { display: flex; flex-shrink: 0; color: #2563EB; }
 .acc__body { padding: 0 16px 14px; color: #52525b; font-size: 14px; line-height: 1.6; }`,
     js: `var accHeads = document.querySelectorAll('.acc__head');
+var ACC_PLUS = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+var ACC_MINUS = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>';
 accHeads.forEach(function (head) {
   head.addEventListener('click', function () {
     var willOpen = head.getAttribute('aria-expanded') !== 'true';
     // 아코디언 바 동작: 하나를 열면 나머지는 전부 닫는다(동시에 하나만 펼침).
     accHeads.forEach(function (h) {
       h.setAttribute('aria-expanded', 'false');
-      h.querySelector('.acc__sign').textContent = '+';
+      h.querySelector('.acc__sign').innerHTML = ACC_PLUS;
       h.nextElementSibling.hidden = true;
     });
     if (willOpen) {
       head.setAttribute('aria-expanded', 'true');
-      head.querySelector('.acc__sign').textContent = '−';
+      head.querySelector('.acc__sign').innerHTML = ACC_MINUS;
       head.nextElementSibling.hidden = false;
     }
   });
@@ -369,20 +372,21 @@ accHeads.forEach(function (head) {
     n: 2, name: "Bento Menu", ko: "벤토 메뉴", cat: "nav",
     desc: "도시락(벤토)처럼 격자형 아이콘으로 주요 메뉴를 한눈에 보여준다. 구글 앱 런처가 대표적이다.",
     html: `<button class="bento__btn" aria-label="앱 메뉴 열기">
-  <span></span><span></span><span></span>
-  <span></span><span></span><span></span>
-  <span></span><span></span><span></span>
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
+    <line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>
+  </svg>
 </button>
 <div class="bento__grid" hidden>
   <a href="#">메일</a><a href="#">캘린더</a><a href="#">드라이브</a>
   <a href="#">문서</a><a href="#">시트</a><a href="#">슬라이드</a>
 </div>`,
     css: `.bento__btn {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
-  width: 40px; height: 40px; padding: 6px; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; background: #fff; color: #3f3f46;
   border: 1px solid #d4d4d8; border-radius: 6px; cursor: pointer;
 }
-.bento__btn span { background: #3f3f46; border-radius: 1px; }
 .bento__grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
   margin-top: 8px; padding: 12px; width: 240px;
@@ -567,9 +571,9 @@ document.querySelector('.car__next').addEventListener('click', function () { go(
     n: 9, name: "Döner Menu", ko: "되너 메뉴", cat: "nav",
     desc: "길이가 다른 가로선 3개로 된 메뉴. 햄버거 메뉴와 달리 '필터 그룹'을 의미하는 경우가 많다.",
     html: `<button class="doner" aria-label="필터 열기">
-  <span style="width:20px"></span>
-  <span style="width:14px"></span>
-  <span style="width:8px"></span>
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="15" y2="12"/><line x1="4" y1="18" x2="10" y2="18"/>
+  </svg>
 </button>
 <div class="doner__panel" hidden>
   <p>정렬 / 필터</p>
@@ -578,11 +582,10 @@ document.querySelector('.car__next').addEventListener('click', function () { go(
   <label><input type="radio" name="sort"> 가격순</label>
 </div>`,
     css: `.doner {
-  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
-  width: 40px; height: 40px; padding: 10px; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; background: #fff; color: #3f3f46;
   border: 1px solid #d4d4d8; border-radius: 6px; cursor: pointer;
 }
-.doner span { height: 2px; background: #3f3f46; border-radius: 1px; }
 .doner__panel {
   margin-top: 8px; padding: 14px; width: 180px;
   border: 1px solid #d4d4d8; border-radius: 8px; background: #fff;
@@ -623,12 +626,18 @@ d.addEventListener('click', function () { p.hidden = !p.hidden; });`
   <article class="feed__post">
     <header><strong>brewnet</strong> <span>· 1시간</span></header>
     <p>클로드 코드 강의 1편이 공개됐습니다.</p>
-    <footer><button>♥ 24</button><button>↩ 답글</button></footer>
+    <footer>
+      <button><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.8l-1-1.2a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> 24</button>
+      <button><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg> 답글</button>
+    </footer>
   </article>
   <article class="feed__post">
     <header><strong>run-ai.kr</strong> <span>· 3시간</span></header>
     <p>SDD 방법론 정리 노트를 올렸어요.</p>
-    <footer><button>♥ 51</button><button>↩ 답글</button></footer>
+    <footer>
+      <button><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.8l-1-1.2a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> 51</button>
+      <button><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg> 답글</button>
+    </footer>
   </article>
 </div>`,
     css: `.feed { width: 300px; }
@@ -637,7 +646,7 @@ d.addEventListener('click', function () { p.hidden = !p.hidden; });`
 .feed__post header strong { color: #18181b; }
 .feed__post p { margin: 0 0 10px; font-size: 15px; color: #27272a; line-height: 1.5; }
 .feed__post footer { display: flex; gap: 16px; }
-.feed__post button { background: 0; border: 0; color: #71717a; font-size: 13px; cursor: pointer; padding: 0; }
+.feed__post button { display: inline-flex; align-items: center; gap: 4px; background: 0; border: 0; color: #71717a; font-size: 13px; cursor: pointer; padding: 0; }
 .feed__post button:hover { color: #2563EB; }`,
     js: ``
   },
@@ -663,9 +672,10 @@ d.addEventListener('click', function () { p.hidden = !p.hidden; });`
 .form__submit {
   width: 100%; padding: 10px; font-size: 14px; background: #2563EB; color: #fff;
   border: 0; border-radius: 6px; cursor: pointer;
-}`,
+}
+.form__check { vertical-align: -2px; margin-left: 4px; }`,
     js: `document.querySelector('.form__submit').addEventListener('click', function () {
-  this.textContent = '전송 완료 ✓';
+  this.innerHTML = '전송 완료 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="form__check"><polyline points="20 6 9 17 4 12"/></svg>';
   this.style.background = '#16a34a';
 });`
   },
@@ -673,20 +683,24 @@ d.addEventListener('click', function () { p.hidden = !p.hidden; });`
     n: 13, name: "Hamburger Menu", ko: "햄버거 메뉴", cat: "nav",
     desc: "길이가 같은 가로선 3개로 된 메뉴 아이콘. 보통 좌측 상단에서 내비게이션 링크 묶음을 연다.",
     html: `<button class="ham" aria-label="메뉴 열기" aria-expanded="false">
-  <span></span><span></span><span></span>
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <line class="ham__l ham__l1" x1="4" y1="6" x2="20" y2="6"/>
+    <line class="ham__l ham__l2" x1="4" y1="12" x2="20" y2="12"/>
+    <line class="ham__l ham__l3" x1="4" y1="18" x2="20" y2="18"/>
+  </svg>
 </button>
 <nav class="ham__menu" hidden>
   <a href="#">홈</a><a href="#">강의</a><a href="#">블로그</a><a href="#">문의</a>
 </nav>`,
     css: `.ham {
-  display: flex; flex-direction: column; justify-content: center; gap: 5px;
-  width: 40px; height: 40px; padding: 9px; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; background: #fff; color: #3f3f46;
   border: 1px solid #d4d4d8; border-radius: 6px; cursor: pointer;
 }
-.ham span { height: 2px; background: #3f3f46; border-radius: 1px; transition: transform 120ms, opacity 120ms; }
-.ham[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.ham[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.ham[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.ham__l { transition: transform 120ms, opacity 120ms; transform-box: fill-box; transform-origin: center; }
+.ham[aria-expanded="true"] .ham__l1 { transform: translateY(6px) rotate(45deg); }
+.ham[aria-expanded="true"] .ham__l2 { opacity: 0; }
+.ham[aria-expanded="true"] .ham__l3 { transform: translateY(-6px) rotate(-45deg); }
 .ham__menu { margin-top: 8px; width: 160px; border: 1px solid #d4d4d8; border-radius: 8px; overflow: hidden; }
 .ham__menu a { display: block; padding: 11px 14px; font-size: 14px; color: #18181b; text-decoration: none; }
 .ham__menu a:hover { background: #f4f4f5; }`,
@@ -703,13 +717,13 @@ h.addEventListener('click', function () {
     desc: "내용을 함축적으로 전달하거나 특정 동작을 촉발하는 작은 이미지. SVG로 만들면 선명하고 가볍다.",
     html: `<div class="icons">
   <button class="icon" aria-label="홈">
-    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>
   </button>
   <button class="icon" aria-label="검색">
-    <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
   </button>
   <button class="icon" aria-label="설정">
-    <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke="currentColor" stroke-width="1.6"/></svg>
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
   </button>
 </div>`,
     css: `.icons { display: flex; gap: 10px; }
@@ -743,17 +757,18 @@ h.addEventListener('click', function () {
     n: 16, name: "Kebab Menu", ko: "케밥 메뉴", cat: "nav",
     desc: "세로 점 3개로 된 메뉴. 해당 항목에 적용 가능한 옵션 묶음을 펼친다.",
     html: `<button class="keb" aria-label="더보기">
-  <span></span><span></span><span></span>
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none">
+    <circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/>
+  </svg>
 </button>
 <div class="keb__menu" hidden>
   <button>편집</button><button>공유</button><button>삭제</button>
 </div>`,
     css: `.keb {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-  width: 36px; height: 36px; background: #fff; border: 1px solid #e4e4e7;
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; background: #fff; color: #3f3f46; border: 1px solid #e4e4e7;
   border-radius: 6px; cursor: pointer;
 }
-.keb span { width: 4px; height: 4px; border-radius: 50%; background: #3f3f46; }
 .keb__menu { margin-top: 6px; width: 130px; border: 1px solid #d4d4d8; border-radius: 8px; overflow: hidden; }
 .keb__menu button { display: block; width: 100%; padding: 10px 14px; text-align: left; font-size: 14px; color: #18181b; background: 0; border: 0; cursor: pointer; }
 .keb__menu button:hover { background: #f4f4f5; }`,
@@ -787,17 +802,18 @@ k.addEventListener('click', function () { km.hidden = !km.hidden; });`
     n: 18, name: "Meatballs Menu", ko: "미트볼 메뉴", cat: "nav",
     desc: "가로 점 3개로 된 메뉴. 클릭하면 추가 옵션이 펼쳐진다. 케밥(세로)과 방향만 다르다.",
     html: `<button class="meat" aria-label="옵션">
-  <span></span><span></span><span></span>
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none">
+    <circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>
+  </svg>
 </button>
 <div class="meat__menu" hidden>
   <button>이름 변경</button><button>복제</button><button>아카이브</button>
 </div>`,
     css: `.meat {
-  display: flex; align-items: center; justify-content: center; gap: 4px;
-  width: 40px; height: 32px; background: #fff; border: 1px solid #e4e4e7;
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 32px; background: #fff; color: #3f3f46; border: 1px solid #e4e4e7;
   border-radius: 6px; cursor: pointer;
 }
-.meat span { width: 4px; height: 4px; border-radius: 50%; background: #3f3f46; }
 .meat__menu { margin-top: 6px; width: 140px; border: 1px solid #d4d4d8; border-radius: 8px; overflow: hidden; }
 .meat__menu button { display: block; width: 100%; padding: 10px 14px; text-align: left; font-size: 14px; color: #18181b; background: 0; border: 0; cursor: pointer; }
 .meat__menu button:hover { background: #f4f4f5; }`,
@@ -842,7 +858,7 @@ document.querySelector('.modal__confirm').addEventListener('click', close);`
     desc: "새 소식·성공·오류 등을 알리는 표식. 작은 빨간 점부터 토스트 메시지까지 형태가 다양하다.",
     html: `<div class="noti">
   <button class="noti__bell" aria-label="알림">
-    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M6 9a6 6 0 0112 0c0 5 2 6 2 6H4s2-1 2-6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 19a2 2 0 004 0" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0112 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2 2 0 004 0"/></svg>
     <span class="noti__dot">3</span>
   </button>
   <div class="noti__toast noti__toast--ok">저장되었습니다.</div>
@@ -956,7 +972,7 @@ document.querySelector('.prog__btn').addEventListener('click', function () {
     n: 25, name: "Search Field", ko: "검색 필드", cat: "input",
     desc: "돋보기 아이콘이 들어간 입력 필드로, 시스템 내 정보를 찾게 한다.",
     html: `<form class="srch" onsubmit="return false">
-  <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="7" fill="none" stroke="#71717a" stroke-width="1.6"/><path d="M20 20l-3.5-3.5" stroke="#71717a" stroke-width="1.6"/></svg>
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
   <input type="search" placeholder="강의 검색...">
   <button type="submit">검색</button>
 </form>`,
@@ -1016,14 +1032,14 @@ range.addEventListener('input', function () { out.textContent = range.value; });
     html: `<div class="stp">
   <label>수량</label>
   <div class="stp__box">
-    <button class="stp__btn" data-d="-1" aria-label="감소">−</button>
+    <button class="stp__btn" data-d="-1" aria-label="감소"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
     <span class="stp__val">1</span>
-    <button class="stp__btn" data-d="1" aria-label="증가">+</button>
+    <button class="stp__btn" data-d="1" aria-label="증가"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
   </div>
 </div>`,
     css: `.stp label { display: block; margin-bottom: 8px; font-size: 13px; color: #52525b; }
 .stp__box { display: inline-flex; align-items: center; border: 1px solid #d4d4d8; border-radius: 6px; overflow: hidden; }
-.stp__btn { width: 40px; height: 40px; font-size: 18px; background: #fff; color: #18181b; border: 0; cursor: pointer; }
+.stp__btn { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #fff; color: #18181b; border: 0; cursor: pointer; }
 .stp__btn:hover { background: #f4f4f5; }
 .stp__val { min-width: 44px; text-align: center; font-size: 15px; color: #18181b; border-left: 1px solid #e4e4e7; border-right: 1px solid #e4e4e7; line-height: 40px; }`,
     js: `var val = document.querySelector('.stp__val');
@@ -1041,7 +1057,7 @@ document.querySelectorAll('.stp__btn').forEach(function (b) {
     html: `<div class="tags">
   <span class="tag">#클로드코드</span>
   <span class="tag">#AI개발</span>
-  <span class="tag tag--rm">#TDD <button aria-label="제거">×</button></span>
+  <span class="tag tag--rm">#TDD <button aria-label="제거"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
   <span class="tag">#SDD</span>
 </div>`,
     css: `.tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -1049,7 +1065,7 @@ document.querySelectorAll('.stp__btn').forEach(function (b) {
   display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px;
   font-size: 13px; color: #3730a3; background: #eef2ff; border-radius: 6px;
 }
-.tag--rm button { background: 0; border: 0; color: #6366f1; font-size: 15px; line-height: 1; cursor: pointer; padding: 0; }
+.tag--rm button { display: inline-flex; align-items: center; background: 0; border: 0; color: #6366f1; line-height: 1; cursor: pointer; padding: 0; }
 .tag--rm button:hover { color: #312e81; }`,
     js: `document.querySelectorAll('.tag--rm button').forEach(function (b) {
   b.addEventListener('click', function () { b.closest('.tag').remove(); });
@@ -1168,6 +1184,19 @@ function escapeHtml(s){
   return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
 
+// 사이트 UI 자체(사이드바 토글·복사 버튼 등)에서만 쓰는 아이콘 헬퍼.
+// lucide.dev 규격(24x24 viewBox, stroke=currentColor, stroke-width 2, 둥근 선끝/모서리)을 따른다.
+// 각 컴포넌트 데이터의 html/css/js는 그대로 복사되는 코드이므로 이 헬퍼에 의존하지 않고
+// 각자 완결된 <svg>를 인라인으로 갖는다.
+var ICONS = {
+  copy: '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+  check: '<polyline points="20 6 9 17 4 12"/>'
+};
+function icon(name, size){
+  size = size || 14;
+  return '<svg class="ic" viewBox="0 0 24 24" width="' + size + '" height="' + size + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICONS[name] + '</svg>';
+}
+
 // ── 기본 문법 하이라이트 ──
 // 라이브러리 없이 정규식 기반으로 주석/태그·셀렉터/속성/문자열만 구분해 표시하는 최소 하이라이터.
 // anti-slop 규칙(무채색+단일 액센트)을 지키기 위해 색은 회색(주석) + 액센트(태그·키워드) 2톤만 쓴다.
@@ -1213,7 +1242,7 @@ function codeBlock(label, source, lang){
            '<div class="code-empty">이 요소는 ' + label + ' 코드가 필요하지 않습니다.</div></div>';
   }
   return '<div class="panel" data-tab="' + lang + '" hidden>' +
-         '<div class="code-wrap"><button class="code-copy" data-src="' + lang + '">복사</button>' +
+         '<div class="code-wrap"><button class="code-copy" data-src="' + lang + '">' + icon('copy', 13) + '<span>복사</span></button>' +
          '<pre><code>' + highlightCode(source.trim(), lang) + '</code></pre></div></div>';
 }
 
@@ -1263,8 +1292,8 @@ function select(n){
       var src = btn.dataset.src;
       var text = src === "html" ? e.html : src === "css" ? e.css : e.js;
       navigator.clipboard && navigator.clipboard.writeText(text.trim());
-      var old = btn.textContent; btn.textContent = "복사됨 ✓";
-      setTimeout(function(){ btn.textContent = old; }, 1200);
+      var old = btn.innerHTML; btn.innerHTML = icon('check', 13) + '<span>복사됨</span>';
+      setTimeout(function(){ btn.innerHTML = old; }, 1200);
     });
   });
 
