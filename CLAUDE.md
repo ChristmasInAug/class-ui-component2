@@ -51,4 +51,8 @@ CareerFoundry의 ["32 UI Elements Designers Need To Know"](https://careerfoundry
 
 ## 프롬프트 기록 훅
 
-`.claude/settings.json`에 **Stop 훅**이 걸려 있어, 세션 종료 시 `extract-my-prompts.sh`가 이 폴더의 Claude Code 세션에서 사용자가 입력한 프롬프트만 뽑아 [Prompt.md](Prompt.md)에 append한다.
+`.claude/settings.json`에 **Stop 훅**이 걸려 있어, 세션 종료 시 `extract-my-prompts.sh`가 이 폴더의 Claude Code 세션에서 사용자가 입력한 프롬프트만 뽑아 [Prompt.md](Prompt.md)에 append한다. `Prompt.md`/`.handoff.md`는 실제 대화 내용을 담기 때문에 `.gitignore`로 git 추적에서 제외돼 있다(저장소가 PUBLIC이므로).
+
+## 다른 프로젝트로 가져갈 수 있는 재사용 문서
+
+루트의 [HANDOFF_TEMPLATE.md](HANDOFF_TEMPLATE.md)와 [TROUBLE_SHOOTING.md](TROUBLE_SHOOTING.md)는 이 프로젝트 전용이 아니라 **프로젝트 무관 재사용 템플릿**이다. `docs/resource/`에도 원본이 있지만 그 폴더는 참고용 스냅샷이라 수정하지 않기로 했고(위 규칙 참고), 실제로 이 저장소에서 검증하며 다듬은 최신 버전은 루트의 두 파일 쪽이다 — 다른 프로젝트에 가져갈 때는 이 둘을 복사한다.
